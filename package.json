@@ -1,0 +1,14 @@
+{
+  "name": "diamond_crm",
+  "version": "1.0.0",
+  "description": "Mini crm project",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "install:all": "yarn --cwd backend install && yarn --cwd frontend install",
+    "build:frontend": "yarn --cwd frontend build",
+    "build:backend": "yarn --cwd backend build",
+    "build": "yarn build:frontend & yarn build:backend",
+    "start": "node backend/dist/server.js"
+  }
+}
