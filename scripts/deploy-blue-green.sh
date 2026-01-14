@@ -2,21 +2,7 @@
 set -euo pipefail
 
 IMAGE=ekzis/diamond-crm
-APP=diamond-crm
 NGINX_CONF=/etc/nginx/sites-available/diamond-crm
-
-# 1. Определение green & blue.
-if docker ps --format '{{.Names}}' | grep -q "${APP}-blue"; then
-  ACTIVE=blue
-  NEW=green
-  OLD_PORT=3000
-  NEW_PORT=3001
-else
-  ACTIVE=green
-  NEW=blue
-  OLD_PORT=3001
-  NEW_PORT=3000
-fi
 
 echo "Active: $ACTIVE $OLD_PORT → Deploying: $NEW $NEW_PORT"
 
@@ -47,25 +33,12 @@ sudo systemctl restart nginx
 echo "Порт изменён на $NEW_PORT"
 
 # 5. Остановка и удаление прошлого докер контейнера.
-docker stop "${APP}-${ACTIVE}"
-docker rm "${APP}-${ACTIVE}"
+docker stop "${APP}-${ACTIVE}" || true
+docker rm "${APP}-${ACTIVE}" || true
 
 echo "Докер контейнер ${APP}-${ACTIVE} удалён"
 
-# 6. Удаляем старый image.
-
-# Получаем IMAGE ID образа с тегом latest
-LATEST_ID=$(docker images -q "${IMAGE}:latest")
-
-# Получаем все IMAGE ID репозитория, кроме latest
-OLD_IMAGES=$(docker images -q "$IMAGE" | grep -v "$LATEST_ID")
-
-echo "Докер образы $OLD_IMAGES"
-
-if [ -n "$OLD_IMAGES" ]; then
-  for img in $OLD_IMAGES; do
-    docker rmi -f "$img" && echo "Old image removed: $img"
-  done
-fi
+# 6. Удаляем старые images.
+docker image prune -f
 
 echo "✅ Deploy finished"

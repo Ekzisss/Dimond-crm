@@ -28,5 +28,5 @@ EXPOSE 3000
 # 9️⃣ Устанавливаем PM2 для запуска backend
 RUN yarn global add pm2
 
-# 10️⃣ Команда запуска
+# 1️⃣0️⃣ Команда запуска
 CMD ["pm2-runtime", "backend/dist/server.js", "--name", "app"]
