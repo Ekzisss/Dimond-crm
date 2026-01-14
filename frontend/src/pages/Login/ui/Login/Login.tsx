@@ -1,8 +1,11 @@
 import { type FC } from 'react';
-import { useForm, type RegisterOptions, type SubmitHandler } from 'react-hook-form';
+import { useForm, type SubmitHandler } from 'react-hook-form';
 
-import { FormFields, type LoginFormValues } from '../../models/types';
+import { Input, PasswordInput, Checkbox, Button, Text, Link } from '@shared/ui';
+import { LogoIcon, EmailIcon, LockIcon, EyeIcon, EyeOffIcon } from '@shared/ui/icons';
+
 import { DEFAULT_VALUES, VALIDATIONS } from '../../models/constants';
+import { type LoginFormValues } from '../../models/types';
 
 import s from './Login.module.css';
 
@@ -18,26 +21,63 @@ export const Login: FC = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Email 123</label>
+    <div className={s.container}>
+      <div className={s.loginCard}>
+        <div className={s.header}>
+          <div className={s.logo}>
+            <LogoIcon size={48} />
+          </div>
 
-          <input {...register('email', VALIDATIONS.email)} type="email" />
+          <Text className={s.title} as="h1" size="2xl" variant="heading">
+            Добро пожаловать
+          </Text>
 
-          {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
+          <Text className={s.subtitle} size="md" variant="body" color="muted">
+            Войдите в свой аккаунт
+          </Text>
         </div>
 
-        <div>
-          <label>Password</label>
+        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            label="Email"
+            icon={<EmailIcon size={20} />}
+            type="email"
+            placeholder="your.email@example.com"
+            error={errors.email?.message}
+            {...register('email', VALIDATIONS.email)}
+          />
 
-          <input {...register('password', VALIDATIONS.password)} type="password" />
+          <PasswordInput
+            label="Пароль"
+            icon={<LockIcon size={20} />}
+            showPasswordIcon={<EyeIcon size={20} />}
+            hidePasswordIcon={<EyeOffIcon size={20} />}
+            placeholder="Введите пароль"
+            error={errors.password?.message}
+            {...register('password', VALIDATIONS.password)}
+          />
 
-          {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
-        </div>
+          <div className={s.options}>
+            <Checkbox label="Запомнить меня" />
 
-        <button type="submit">Login</button>
-      </form>
+            <Link href="#" size="sm" variant="primary">
+              Забыли пароль?
+            </Link>
+          </div>
+
+          <Button type="submit">Войти</Button>
+
+          <div className={s.footer}>
+            <Text size="sm" color="muted" as="span">
+              Нет аккаунта?
+            </Text>
+
+            <Link href="/register" size="sm" variant="primary">
+              Зарегистрироваться
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -38,29 +38,31 @@ export default defineConfig([
     ],
 
     rules: {
-      'import/order': ['error', { 'newlines-between': 'always' }],
+      'import/order': [
+        'error',
+        {
+          groups: [['builtin', 'external'], 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+          'newlines-between': 'always',
+          pathGroups: [
+            {
+              pattern: '@**/**',
+              group: 'internal',
+            },
+            {
+              pattern: './**/*.css',
+              group: 'sibling',
+              position: 'after',
+            },
+          ],
+          pathGroupsExcludedImportTypes: [],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+          warnOnUnassignedImports: false,
+        },
+      ],
     },
-
-    // rules: {
-    //   'import/order': [
-    //     'error',
-    //     {
-    //       groups: [
-    //         'builtin', // fs, path
-    //         'external', // react, lodash
-    //         'internal', // @/shared
-    //         'parent', // ../
-    //         'sibling', // ./
-    //         'index',
-    //       ],
-    //       'newlines-between': 'always',
-    //       alphabetize: {
-    //         order: 'asc',
-    //         caseInsensitive: true,
-    //       },
-    //     },
-    //   ],
-    // },
 
     languageOptions: {
       ecmaVersion: 'latest',

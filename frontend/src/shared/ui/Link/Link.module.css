@@ -1,0 +1,62 @@
+/* Базовые стили */
+.sizeXs,
+.sizeSm,
+.sizeMd,
+.sizeLg {
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+/* Размеры */
+.sizeXs {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.sizeSm {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.sizeMd {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.sizeLg {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Варианты */
+.variantDefault {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.variantDefault:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.variantPrimary {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.variantPrimary:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+.variantMuted {
+  color: #718096;
+  font-weight: 400;
+}
+
+.variantMuted:hover {
+  color: #667eea;
+  text-decoration: underline;
+}
+

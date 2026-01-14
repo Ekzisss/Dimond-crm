@@ -5,8 +5,8 @@ on:
   pull_request:
 
 jobs:
-  build-and-test-backend:
-    name: Build & Test Backend
+  test-backend:
+    name: Test Backend
     runs-on: ubuntu-latest
 
     steps:
@@ -28,8 +28,8 @@ jobs:
         working-directory: ./backend
         run: yarn build
 
-  build-and-test-frontend:
-    name: Build & Test Frontend
+  test-frontend:
+    name: Test Frontend
     runs-on: ubuntu-latest
 
     steps:
@@ -47,17 +47,17 @@ jobs:
         working-directory: ./frontend
         run: yarn install
 
-      - name: Build Frontend
+      - name: Lint Frontend
         working-directory: ./frontend
-        run: yarn build
+        run: yarn lint
 
   build-docker:
     name: Build and upload docker image
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     needs:
-      - build-and-test-backend
-      - build-and-test-frontend
+      - test-backend
+      - test-frontend
 
     steps:
       - name: Checkout

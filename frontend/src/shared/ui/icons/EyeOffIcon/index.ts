@@ -1,0 +1,2 @@
+export { EyeOffIcon } from './EyeOffIcon';
+

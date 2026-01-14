@@ -1,6 +1,7 @@
+import { FormFields, type LoginFormValues } from './types';
+
 import type { RegisterOptions } from 'react-hook-form';
 
-import { FormFields, type LoginFormValues } from './types';
 
 export const DEFAULT_VALUES: LoginFormValues = {
   email: '',
