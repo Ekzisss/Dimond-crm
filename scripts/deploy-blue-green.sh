@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-IMAGE=ekzis/diamond-crm:latest
+IMAGE=ekzis/diamond-crm
 APP=diamond-crm
 NGINX_CONF=/etc/nginx/sites-available/diamond-crm
 
+# 1. Определение green & blue.
 if docker ps --format '{{.Names}}' | grep -q "${APP}-blue"; then
   ACTIVE=blue
   NEW=green
@@ -17,8 +18,9 @@ else
   NEW_PORT=3000
 fi
 
-echo "Active: $ACTIVE → Deploying: $NEW"
+echo "Active: $ACTIVE $OLD_PORT → Deploying: $NEW $NEW_PORT"
 
+# 2. Разворачивание докер образа.
 docker pull "$IMAGE"
 
 docker rm -f "${APP}-${NEW}" || true
@@ -28,27 +30,42 @@ docker run -d \
   -p "${NEW_PORT}:3000" \
   "$IMAGE"
 
-# проверка здоровья
+echo "Докер образ развёрнут"
+
+# 3. Проверка состояния нового образа.
 for i in {1..10}; do
   curl -fs http://localhost:${NEW_PORT}/api/health && break
   sleep 2
 done
 
-sed -i "s/127.0.0.1:${OLD_PORT}/127.0.0.1:${NEW_PORT}/" "$NGINX_CONF"
-nginx -s reload
+echo "Докер образ ОК"
 
+# 4. Изменение активного порта.
+sudo sed -i "s/127.0.0.1:${OLD_PORT}/127.0.0.1:${NEW_PORT}/" "$NGINX_CONF"
+sudo systemctl restart nginx
+
+echo "Порт изменён на $NEW_PORT"
+
+# 5. Остановка и удаление прошлого докер контейнера.
 docker stop "${APP}-${ACTIVE}"
 docker rm "${APP}-${ACTIVE}"
 
+echo "Докер контейнер ${APP}-${ACTIVE} удалён"
 
-# ===== Удаляем старый image =====
-# Определяем ID старого образа
-OLD_IMAGE=$(docker images -q "${IMAGE}")
+# 6. Удаляем старый image.
 
-# Удаляем старый образ (если есть)
-if [ -n "$OLD_IMAGE" ]; then
-  docker rmi -f "$OLD_IMAGE" || true
-  echo "Old image removed: $OLD_IMAGE"
+# Получаем IMAGE ID образа с тегом latest
+LATEST_ID=$(docker images -q "${IMAGE}:latest")
+
+# Получаем все IMAGE ID репозитория, кроме latest
+OLD_IMAGES=$(docker images -q "$IMAGE" | grep -v "$LATEST_ID")
+
+echo "Докер образы $OLD_IMAGES"
+
+if [ -n "$OLD_IMAGES" ]; then
+  for img in $OLD_IMAGES; do
+    docker rmi -f "$img" && echo "Old image removed: $img"
+  done
 fi
 
 echo "✅ Deploy finished"
