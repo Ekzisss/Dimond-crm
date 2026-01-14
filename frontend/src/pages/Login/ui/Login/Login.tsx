@@ -21,7 +21,7 @@ export const Login: FC = () => {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label>Email</label>
+          <label>Email 123</label>
 
           <input {...register('email', VALIDATIONS.email)} type="email" />
 

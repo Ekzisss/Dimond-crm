@@ -31,7 +31,6 @@ jobs:
   build-and-test-frontend:
     name: Build & Test Frontend
     runs-on: ubuntu-latest
-    needs: build-and-test-backend
 
     steps:
       - name: Checkout code
@@ -81,7 +80,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Copy rollout script to staging
+      - name: Copy rollout script to stage
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -90,7 +89,7 @@ jobs:
           source: 'scripts/stage_deployer.sh'
           target: '/tmp/'
 
-      - name: Run rollout script on staging
+      - name: Run rollout script on stage
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.DEPLOY_HOST }}
