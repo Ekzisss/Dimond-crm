@@ -27,12 +27,14 @@ export default defineConfig([
               contexts: ['TSPropertySignature', 'TSIndexSignature', 'TSMethodSignature', 'TSEnumMember'],
             },
           ],
-
-          // Требовать осмысленное описание для каждого поля
           'jsdoc/require-property-description': 'error',
-
-          // (опционально) запретить пустые /** */
           'jsdoc/require-description': 'error',
+          'jsdoc/require-param': 'off',
+          'jsdoc/require-returns': 'off',
+          'jsdoc/require-returns-type': 'off',
+          'jsdoc/require-param-description': 'off',
+          'jsdoc/require-param-type': 'off',
+          'jsdoc/multiline-blocks': ['error', { noSingleLineBlocks: true }],
         },
       }),
     ],
@@ -55,10 +57,6 @@ export default defineConfig([
             },
           ],
           pathGroupsExcludedImportTypes: [],
-          alphabetize: {
-            order: 'asc',
-            caseInsensitive: true,
-          },
           warnOnUnassignedImports: false,
         },
       ],

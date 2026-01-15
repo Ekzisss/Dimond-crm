@@ -3,13 +3,13 @@ import { type FC } from 'react';
 import { AuthLayout } from '@features/AuthLayout';
 import { AuthFormWrapper } from '@widgets/AuthFormWrapper';
 
-import { RegisterForm } from './ui/RegisterForm';
+import { LoginForm } from './ui/LoginForm';
 
-export const Register: FC = () => {
+export const Login: FC = () => {
   return (
     <AuthLayout>
-      <AuthFormWrapper title="Регистрация" description="Создайте новый аккаунт">
-        <RegisterForm />
+      <AuthFormWrapper title="Добро пожаловать" description="Войдите в свой аккаунт">
+        <LoginForm />
       </AuthFormWrapper>
     </AuthLayout>
   );

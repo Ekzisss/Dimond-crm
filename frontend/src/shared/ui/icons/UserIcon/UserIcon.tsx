@@ -1,21 +1,21 @@
 import { type FC } from 'react';
 
-import { type EyeIconProps } from './EyeIcon.types';
+import { type UserIconProps } from './UserIcon.types';
 
-export const EyeIcon: FC<EyeIconProps> = (props) => {
+export const UserIcon: FC<UserIconProps> = (props) => {
   const { size = 20, ...restProps } = props;
 
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" {...restProps}>
       <path
-        d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z"
+        d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+        d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"

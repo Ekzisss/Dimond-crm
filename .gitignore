@@ -1,4 +1,5 @@
 .vscode
+.amazonq
 
 node_modules
 dist
