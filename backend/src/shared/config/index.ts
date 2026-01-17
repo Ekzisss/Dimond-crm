@@ -10,7 +10,7 @@ export const config = {
   /**
    * Время жизни JWT токена
    */
-  jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d',
+  jwtExpiresIn: '7d',
 
   /**
    * Количество раундов для bcrypt
@@ -41,11 +41,6 @@ export const config = {
    * SMTP пароль
    */
   smtpPassword: process.env.SMTP_PASSWORD || '',
-
-  /**
-   * Email отправителя
-   */
-  emailFrom: process.env.EMAIL_FROM || 'siteuser@ahahlol.space',
 
   /**
    * Имя отправителя

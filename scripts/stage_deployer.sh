@@ -12,6 +12,15 @@ docker rm -f $APP || true
 
 docker run -d \
   --name $APP \
+  -v /srv/diamond-crm/data-stage:/app/backend/data \
+  -e JWT_SECRET="$JWT_SECRET" \
+  -e SMTP_HOST="$SMTP_HOST" \
+  -e SMTP_PORT="$SMTP_PORT" \
+  -e SMTP_SECURE="$SMTP_SECURE" \
+  -e SMTP_USER="$SMTP_USER" \
+  -e SMTP_PASSWORD="$SMTP_PASSWORD" \
+  -e EMAIL_FROM_NAME="$EMAIL_FROM_NAME" \
+  -e FRONTEND_URL="$FRONTEND_URL" \
   -p "${PORT}:3000" \
   "$IMAGE"
 

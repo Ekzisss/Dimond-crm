@@ -1,7 +1,39 @@
 import Database from 'better-sqlite3';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
 
-const dbPath = path.join(process.cwd(), 'data', 'database.sqlite');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Определяем корневую папку проекта
+const findProjectRoot = (currentDir: string): string => {
+  const packageJsonPath = path.join(currentDir, 'package.json');
+  
+  if (fs.existsSync(packageJsonPath)) {
+    return currentDir;
+  }
+  
+  const parentDir = path.dirname(currentDir);
+  
+  if (parentDir === currentDir) {
+    throw new Error('Could not find project root (package.json not found)');
+  }
+  
+  return findProjectRoot(parentDir);
+};
+
+const projectRoot = findProjectRoot(__dirname);
+const dbPath = path.join(projectRoot, 'data', 'database.sqlite');
+
+// Создаем папку data если её нет
+const dataDir = path.dirname(dbPath);
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
+
+console.log('Project root:', projectRoot);
+console.log('Database path:', dbPath);
 
 /**
  * SQLite база данных

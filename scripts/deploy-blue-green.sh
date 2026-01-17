@@ -12,7 +12,15 @@ docker pull "$IMAGE"
 docker rm -f "${APP}-${NEW}" || true
 
 docker run -d \
-  -v /srv/diamond-crm/data:/app/data \
+  -v /srv/diamond-crm/data:/app/backend/data \
+  -e JWT_SECRET="${JWT_SECRET}" \
+  -e SMTP_HOST="${SMTP_HOST}" \
+  -e SMTP_PORT="${SMTP_PORT}" \
+  -e SMTP_SECURE="${SMTP_SECURE}" \
+  -e SMTP_USER="${SMTP_USER}" \
+  -e SMTP_PASSWORD="${SMTP_PASSWORD}" \
+  -e EMAIL_FROM_NAME="${EMAIL_FROM_NAME}" \
+  -e FRONTEND_URL="${FRONTEND_URL}" \
   --name "${APP}-${NEW}" \
   -p "${NEW_PORT}:3000" \
   "$IMAGE"

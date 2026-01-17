@@ -1,8 +1,18 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { SetContextLink } from '@apollo/client/link/context';
 
+const getGraphQLUri = (): string => {
+  // В dev режиме используем localhost:3000
+  if (import.meta.env.DEV) {
+    return 'http://localhost:3000/graphql';
+  }
+
+  // В production используем текущий домен
+  return `${window.location.origin}/graphql`;
+};
+
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: getGraphQLUri(),
   credentials: 'include',
   fetchOptions: {
     mode: 'cors',

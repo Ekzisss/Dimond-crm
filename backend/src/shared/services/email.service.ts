@@ -26,21 +26,11 @@ class EmailService {
   async sendPasswordReset({ to, token }: { to: string; token: string }): Promise<void> {
     const resetLink = `${config.frontendUrl}/reset-password?token=${token}`;
 
-    console.log('\n=== SENDING EMAIL ===');
-    console.log('SMTP Config:', {
-      host: config.smtpHost,
-      port: config.smtpPort,
-      secure: config.smtpSecure,
-      user: config.smtpUser,
-      hasPassword: !!config.smtpPassword,
-    });
-    console.log('To:', to);
-    console.log('From:', `"${config.emailFromName}" <${config.emailFrom}>`);
-    console.log('Link:', resetLink);
+    console.log(config);
 
     try {
       const info = await this.transporter.sendMail({
-        from: `"${config.emailFromName}" <${config.emailFrom}>`,
+        from: `"${config.emailFromName}" <${config.smtpUser}>`,
         to,
         subject: 'Восстановление пароля - Diamond CRM',
         html: `

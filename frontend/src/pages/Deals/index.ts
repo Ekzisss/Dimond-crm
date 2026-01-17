@@ -1,1 +1,1 @@
-export { Deals } from './Deals';
+export { Deals as default } from './Deals';

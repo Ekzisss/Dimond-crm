@@ -1,8 +1,4 @@
-import { Login } from '@pages/Login';
-import { Register } from '@pages/Register';
-import { ForgotPassword } from '@pages/ForgotPassword';
-import { ResetPassword } from '@pages/ResetPassword';
-import { Deals } from '@pages/Deals';
+import { lazy } from 'react';
 
 import { type RouteConfig } from './routeConfig.types';
 
@@ -12,27 +8,27 @@ import { type RouteConfig } from './routeConfig.types';
 export const routeConfig: RouteConfig[] = [
   {
     path: '/deals',
-    component: Deals,
+    component: lazy(() => import('@pages/Deals')),
     protected: true,
   },
   {
     path: '/login',
-    component: Login,
+    component: lazy(() => import('@pages/Login')),
     authOnly: true,
   },
   {
     path: '/register',
-    component: Register,
+    component: lazy(() => import('@pages/Register')),
     authOnly: true,
   },
   {
     path: '/forgot-password',
-    component: ForgotPassword,
+    component: lazy(() => import('@pages/ForgotPassword')),
     authOnly: true,
   },
   {
     path: '/reset-password',
-    component: ResetPassword,
+    component: lazy(() => import('@pages/ResetPassword')),
     authOnly: true,
   },
 ];

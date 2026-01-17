@@ -4,6 +4,7 @@ import path from 'path';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@as-integrations/express4';
 import cors from 'cors';
+import { fileURLToPath } from 'url';
 
 import { initDatabase } from '@shared/database';
 import { typeDefs, resolvers } from '@shared/graphql';
@@ -13,9 +14,17 @@ import { createContext } from '@shared/types';
 initDatabase();
 
 const app = express();
-const PORT = 4000;
-const root = process.cwd();
+const PORT = 3000;
 const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:5173'];
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// backend/src → backend
+// backend/dist → backend
+const BACKEND_ROOT = path.resolve(__dirname, '..');
+
+const PROJECT_ROOT = path.resolve(BACKEND_ROOT, '..');
 
 const server = new ApolloServer({
   typeDefs,
@@ -35,7 +44,7 @@ app.use(
   express.json(),
   expressMiddleware(server, {
     context: async ({ req }: { req: express.Request }) => createContext(req),
-  })
+  }),
 );
 
 // API
@@ -44,10 +53,10 @@ app.get('/api/health', (_, res) => {
 });
 
 // FRONT
-app.use(express.static(path.join(root, 'frontend', 'dist')));
+app.use(express.static(path.join(PROJECT_ROOT, 'frontend', 'dist')));
 
 app.use((_, res) => {
-  res.sendFile(path.join(root, 'frontend', 'dist', 'index.html'));
+  res.sendFile(path.join(PROJECT_ROOT, 'frontend', 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
