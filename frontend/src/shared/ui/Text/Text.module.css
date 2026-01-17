@@ -1,0 +1,83 @@
+/* Размеры */
+.sizeXs {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.sizeSm {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.sizeMd {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.sizeLg {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.sizeXl {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.size2xl {
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+/* Варианты */
+.variantBody {
+  font-weight: 400;
+}
+
+.variantHeading {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.variantCaption {
+  font-weight: 500;
+}
+
+/* Цвета */
+.colorDefault {
+  color: #1a202c;
+}
+
+.colorMuted {
+  color: #718096;
+}
+
+.colorPrimary {
+  color: #667eea;
+}
+
+.colorError {
+  color: #fc8181;
+}
+
+.colorSuccess {
+  color: #48bb78;
+}
+
+.colorWarning {
+  color: #ed8936;
+}
+
+
+/* Выравнивание */
+.alignLeft {
+  text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}

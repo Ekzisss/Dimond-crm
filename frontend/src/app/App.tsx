@@ -1,16 +1,16 @@
 import { type FC } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 
-import { Login } from '../pages/Login/ui/Login';
-import { Register } from '../pages/Register';
+import { renderRoutes } from './models';
 
+/**
+ * Конфигурация роутера
+ */
+const router = createBrowserRouter(renderRoutes());
+
+/**
+ * Главный компонент приложения
+ */
 export const App: FC = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 };

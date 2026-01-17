@@ -1,0 +1,82 @@
+.buttonPrimary {
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  font-family: inherit;
+}
+
+.buttonPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.buttonPrimary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+.buttonPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.buttonSecondary {
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #667eea;
+  background: transparent;
+  border: 2px solid #667eea;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.buttonSecondary:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.buttonSecondary:active {
+  background: rgba(102, 126, 234, 0.2);
+}
+
+.buttonSecondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.buttonGhost {
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #667eea;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.buttonGhost:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.buttonGhost:active {
+  background: rgba(102, 126, 234, 0.2);
+}
+
+.buttonGhost:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

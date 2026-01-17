@@ -24,47 +24,78 @@ export default defineConfig([
           'jsdoc/require-jsdoc': [
             'error',
             {
-              contexts: ['TSPropertySignature', 'TSIndexSignature', 'TSMethodSignature', 'TSEnumMember'],
+              contexts: [
+                'TSPropertySignature',
+                'TSIndexSignature',
+                'TSMethodSignature',
+                'TSEnumMember',
+              ],
             },
           ],
-
-          // Требовать осмысленное описание для каждого поля
           'jsdoc/require-property-description': 'error',
-
-          // (опционально) запретить пустые /** */
           'jsdoc/require-description': 'error',
+          'jsdoc/require-param': 'off',
+          'jsdoc/require-returns': 'off',
+          'jsdoc/require-returns-type': 'off',
+          'jsdoc/require-param-description': 'off',
+          'jsdoc/require-param-type': 'off',
+          'jsdoc/multiline-blocks': ['error', { noSingleLineBlocks: true }],
         },
       }),
     ],
 
     rules: {
-      'import/order': ['error', { 'newlines-between': 'always' }],
+      'import/order': [
+        'error',
+        {
+          'groups': [
+            ['builtin', 'external'],
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+            'object',
+            'type',
+          ],
+          'newlines-between': 'always',
+          'pathGroups': [
+            {
+              pattern: '@**/**',
+              group: 'internal',
+            },
+            {
+              pattern: './**/*.css',
+              group: 'sibling',
+              position: 'after',
+            },
+          ],
+          'pathGroupsExcludedImportTypes': [],
+          'warnOnUnassignedImports': false,
+        },
+      ],
     },
-
-    // rules: {
-    //   'import/order': [
-    //     'error',
-    //     {
-    //       groups: [
-    //         'builtin', // fs, path
-    //         'external', // react, lodash
-    //         'internal', // @/shared
-    //         'parent', // ../
-    //         'sibling', // ./
-    //         'index',
-    //       ],
-    //       'newlines-between': 'always',
-    //       alphabetize: {
-    //         order: 'asc',
-    //         caseInsensitive: true,
-    //       },
-    //     },
-    //   ],
-    // },
 
     languageOptions: {
       ecmaVersion: 'latest',
       globals: globals.browser,
+      parserOptions: {
+        project: ['./tsconfig.app.json', './tsconfig.node.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: ['**/*.tsx'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            'FunctionExpression[params.0.type="ObjectPattern"], ArrowFunctionExpression[params.0.type="ObjectPattern"]',
+          message:
+            'Do not destructure props in the component declaration. Destructure them on the next line instead.',
+        },
+      ],
     },
   },
 ]);

@@ -1,0 +1,2 @@
+export { LockIcon } from './LockIcon';
+
