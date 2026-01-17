@@ -24,7 +24,12 @@ export default defineConfig([
           'jsdoc/require-jsdoc': [
             'error',
             {
-              contexts: ['TSPropertySignature', 'TSIndexSignature', 'TSMethodSignature', 'TSEnumMember'],
+              contexts: [
+                'TSPropertySignature',
+                'TSIndexSignature',
+                'TSMethodSignature',
+                'TSEnumMember',
+              ],
             },
           ],
           'jsdoc/require-property-description': 'error',
@@ -43,9 +48,17 @@ export default defineConfig([
       'import/order': [
         'error',
         {
-          groups: [['builtin', 'external'], 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+          'groups': [
+            ['builtin', 'external'],
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+            'object',
+            'type',
+          ],
           'newlines-between': 'always',
-          pathGroups: [
+          'pathGroups': [
             {
               pattern: '@**/**',
               group: 'internal',
@@ -56,8 +69,8 @@ export default defineConfig([
               position: 'after',
             },
           ],
-          pathGroupsExcludedImportTypes: [],
-          warnOnUnassignedImports: false,
+          'pathGroupsExcludedImportTypes': [],
+          'warnOnUnassignedImports': false,
         },
       ],
     },
@@ -65,6 +78,24 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 'latest',
       globals: globals.browser,
+      parserOptions: {
+        project: ['./tsconfig.app.json', './tsconfig.node.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    files: ['**/*.tsx'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            'FunctionExpression[params.0.type="ObjectPattern"], ArrowFunctionExpression[params.0.type="ObjectPattern"]',
+          message:
+            'Do not destructure props in the component declaration. Destructure them on the next line instead.',
+        },
+      ],
     },
   },
 ]);

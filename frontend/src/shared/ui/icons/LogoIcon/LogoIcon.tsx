@@ -9,7 +9,6 @@ export const LogoIcon: FC<LogoIconProps> = (props) => {
     <svg
       width={size}
       height={size}
-      enable-background="new 0 0 319.044 284.572"
       version="1.1"
       viewBox="0 0 319.04 284.57"
       xmlSpace="preserve"

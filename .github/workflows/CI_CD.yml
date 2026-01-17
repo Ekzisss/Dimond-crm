@@ -22,11 +22,11 @@ jobs:
 
       - name: Install Backend Dependencies
         working-directory: ./backend
-        run: yarn install
+        run: yarn install --frozen-lockfile || npm ci
 
-      - name: Build Backend
+      - name: Lint Backend
         working-directory: ./backend
-        run: yarn build
+        run: yarn lint
 
   test-frontend:
     name: Test Frontend
@@ -45,7 +45,7 @@ jobs:
 
       - name: Install Frontend Dependencies
         working-directory: ./frontend
-        run: yarn install
+        run: yarn install --frozen-lockfile || npm ci
 
       - name: Lint Frontend
         working-directory: ./frontend

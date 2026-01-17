@@ -1,9 +1,15 @@
 import { type FC } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router';
 
 import { useAuth } from '@entities/User';
 import { VALIDATION_RULES } from '@shared/lib/validation';
-import { Input, PasswordInput, Checkbox, Button, Text, Link } from '@shared/ui';
+import { Input } from '@shared/ui/Input';
+import { PasswordInput } from '@shared/ui/PasswordInput';
+import { Checkbox } from '@shared/ui/Checkbox';
+import { Button } from '@shared/ui/Button';
+import { Text } from '@shared/ui/Text';
+import { Link } from '@shared/ui/Link';
 import { EmailIcon, LockIcon, EyeIcon, EyeOffIcon } from '@shared/ui/icons';
 
 import { type LoginFormValues, type LoginFormProps } from './LoginForm.types';
@@ -11,7 +17,10 @@ import { type LoginFormValues, type LoginFormProps } from './LoginForm.types';
 import s from './LoginForm.module.css';
 
 export const LoginForm: FC<LoginFormProps> = (props) => {
-  const { login } = useAuth();
+  const { onSuccess } = props;
+  const { login, isLoading, error } = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -20,16 +29,24 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
 
   const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
     try {
-      await login(data.email, data.password);
+      await login({ email: data.email, password: data.password });
 
-      props.onSuccess?.();
-    } catch (error) {
-      console.error(error);
+      navigate('/deals');
+
+      onSuccess?.();
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+      {error && (
+        <Text size="sm" color="muted" as="div" className={s.error}>
+          {error}
+        </Text>
+      )}
+
       <Input
         label="Email"
         icon={<EmailIcon size={20} />}
@@ -57,7 +74,9 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
         </Link>
       </div>
 
-      <Button type="submit">Войти</Button>
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? 'Вход...' : 'Войти'}
+      </Button>
 
       <div className={s.footer}>
         <Text size="sm" color="muted" as="span">

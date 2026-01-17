@@ -3,7 +3,11 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 
 import { useAuth } from '@entities/User';
 import { VALIDATION_RULES } from '@shared/lib/validation';
-import { Input, PasswordInput, Button, Text, Link } from '@shared/ui';
+import { Input } from '@shared/ui/Input';
+import { PasswordInput } from '@shared/ui/PasswordInput';
+import { Button } from '@shared/ui/Button';
+import { Text } from '@shared/ui/Text';
+import { Link } from '@shared/ui/Link';
 import { EmailIcon, LockIcon, EyeIcon, EyeOffIcon, UserIcon } from '@shared/ui/icons';
 
 import { type RegisterFormValues, type RegisterFormProps } from './RegisterForm.types';
@@ -11,7 +15,9 @@ import { type RegisterFormValues, type RegisterFormProps } from './RegisterForm.
 import s from './RegisterForm.module.css';
 
 export const RegisterForm: FC<RegisterFormProps> = (props) => {
-  const { register: registerUser } = useAuth();
+  const { onSuccess } = props;
+  const { register: registerUser, isLoading, error } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -24,8 +30,9 @@ export const RegisterForm: FC<RegisterFormProps> = (props) => {
 
   const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
     try {
-      await registerUser(data.email, data.password, data.name);
-      props.onSuccess?.();
+      await registerUser({ email: data.email, password: data.password, name: data.name });
+
+      onSuccess?.();
     } catch (error) {
       console.error(error);
     }
@@ -33,6 +40,11 @@ export const RegisterForm: FC<RegisterFormProps> = (props) => {
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+      {error && (
+        <Text size="sm" color="muted" as="div" className={s.error}>
+          {error}
+        </Text>
+      )}
       <Input
         label="Имя"
         icon={<UserIcon size={20} />}
@@ -71,7 +83,9 @@ export const RegisterForm: FC<RegisterFormProps> = (props) => {
         {...register('passwordConfirm', VALIDATION_RULES.passwordConfirm(password))}
       />
 
-      <Button type="submit">Зарегистрироваться</Button>
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
+      </Button>
 
       <div className={s.footer}>
         <Text size="sm" color="muted" as="span">

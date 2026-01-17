@@ -11,3 +11,12 @@
   gap: 8px;
   margin-top: 8px;
 }
+
+.error {
+  padding: 12px;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  color: #c33;
+  text-align: center;
+}

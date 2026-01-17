@@ -12,6 +12,7 @@ docker pull "$IMAGE"
 docker rm -f "${APP}-${NEW}" || true
 
 docker run -d \
+  -v /srv/diamond-crm/data:/app/data \
   --name "${APP}-${NEW}" \
   -p "${NEW_PORT}:3000" \
   "$IMAGE"

@@ -3,17 +3,35 @@
   "version": "1.0.0",
   "description": "Backend for diamond crm",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "lint": "eslint . && tsc --noEmit"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "@apollo/server": "^5.2.0",
+    "@as-integrations/express4": "^1.1.2",
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "graphql": "^16.12.0",
+    "jsonwebtoken": "^9.0.3",
+    "nodemailer": "^7.0.12"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/nodemailer": "^7.0.5",
+    "eslint": "^9.39.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.0"
   }
 }

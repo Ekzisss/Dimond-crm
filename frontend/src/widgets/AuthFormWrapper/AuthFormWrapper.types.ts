@@ -11,7 +11,7 @@ export interface AuthFormWrapperProps {
   /**
    * Описание формы
    */
-  description: string;
+  description?: string;
   /**
    * Содержимое формы
    */

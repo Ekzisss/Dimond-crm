@@ -1,5 +1,7 @@
 .vscode
 .amazonq
+.env*
 
 node_modules
 dist
+*.sqlite

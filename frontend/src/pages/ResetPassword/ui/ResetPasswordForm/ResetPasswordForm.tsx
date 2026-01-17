@@ -3,7 +3,9 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 
 import { useAuth } from '@entities/User';
 import { VALIDATION_RULES } from '@shared/lib/validation';
-import { PasswordInput, Button, Link } from '@shared/ui';
+import { PasswordInput } from '@shared/ui/PasswordInput';
+import { Button } from '@shared/ui/Button';
+import { Link } from '@shared/ui/Link';
 import { LockIcon, EyeIcon, EyeOffIcon } from '@shared/ui/icons';
 
 import { type ResetPasswordFormValues, type ResetPasswordFormProps } from './ResetPasswordForm.types';
@@ -11,7 +13,9 @@ import { type ResetPasswordFormValues, type ResetPasswordFormProps } from './Res
 import s from './ResetPasswordForm.module.css';
 
 export const ResetPasswordForm: FC<ResetPasswordFormProps> = (props) => {
+  const { token, onSuccess } = props;
   const { resetPassword } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -24,8 +28,9 @@ export const ResetPasswordForm: FC<ResetPasswordFormProps> = (props) => {
 
   const onSubmit: SubmitHandler<ResetPasswordFormValues> = async (data) => {
     try {
-      await resetPassword(props.token, data.password);
-      props.onSuccess?.();
+      await resetPassword({ token, newPassword: data.password });
+
+      onSuccess?.();
     } catch (error) {
       console.error(error);
     }
