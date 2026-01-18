@@ -7,6 +7,10 @@ import { type RouteConfig } from './routeConfig.types';
  */
 export const routeConfig: RouteConfig[] = [
   {
+    path: '/',
+    component: lazy(() => import('@pages/Landing')),
+  },
+  {
     path: '/deals',
     component: lazy(() => import('@pages/Deals')),
     protected: true,
