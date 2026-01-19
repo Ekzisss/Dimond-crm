@@ -3,7 +3,7 @@ import { type FC } from 'react';
 import { AuthLayout } from '@features/AuthLayout';
 import { AuthFormWrapper } from '@widgets/AuthFormWrapper';
 
-import { LoginForm } from './LoginForm';
+import { LoginForm } from './components/LoginForm';
 import { type LoginProps } from './Login.types';
 
 /**

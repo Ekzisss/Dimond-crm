@@ -3,7 +3,7 @@ import { type FC } from 'react';
 import { AuthLayout } from '@features/AuthLayout';
 import { AuthFormWrapper } from '@widgets/AuthFormWrapper';
 
-import { ForgotPasswordForm } from './ForgotPasswordForm';
+import { ForgotPasswordForm } from './components/ForgotPasswordForm';
 import { type ForgotPasswordProps } from './ForgotPassword.types';
 
 /**

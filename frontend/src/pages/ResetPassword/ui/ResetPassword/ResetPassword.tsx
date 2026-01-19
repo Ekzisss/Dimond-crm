@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router';
 import { AuthLayout } from '@features/AuthLayout';
 import { AuthFormWrapper } from '@widgets/AuthFormWrapper';
 
-import { ResetPasswordForm } from './ResetPasswordForm';
+import { ResetPasswordForm } from './components/ResetPasswordForm';
 import { type ResetPasswordProps } from './ResetPassword.types';
 
 /**
