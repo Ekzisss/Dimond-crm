@@ -1,11 +1,12 @@
 import { authResolvers, authTypeDefs } from '@features/auth';
+import { dealsResolvers, dealsTypeDefs } from '@features/deals';
 
 /**
  * Объединенные GraphQL схемы
  */
 export const typeDefs = [
   authTypeDefs,
-  // Добавляй другие схемы здесь
+  dealsTypeDefs,
 ];
 
 /**
@@ -14,9 +15,11 @@ export const typeDefs = [
 export const resolvers = {
   Query: {
     ...authResolvers.Query,
+    ...dealsResolvers.Query,
     health: () => 'OK',
   },
   Mutation: {
     ...authResolvers.Mutation,
+    ...dealsResolvers.Mutation,
   },
 };

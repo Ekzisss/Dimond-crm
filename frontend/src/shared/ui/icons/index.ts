@@ -4,4 +4,9 @@ export { LockIcon } from './LockIcon';
 export { EyeIcon } from './EyeIcon';
 export { EyeOffIcon } from './EyeOffIcon';
 export { UserIcon } from './UserIcon';
-
+export { DealsIcon } from './DealsIcon';
+export { LogoutIcon } from './LogoutIcon';
+export { MenuIcon } from './MenuIcon';
+export { ChevronLeftIcon } from './ChevronLeftIcon';
+export { EditIcon } from './EditIcon';
+export { DeleteIcon } from './DeleteIcon';

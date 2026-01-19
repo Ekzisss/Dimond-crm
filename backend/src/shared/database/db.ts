@@ -62,8 +62,21 @@ export const initDatabase = () => {
       FOREIGN KEY (user_id) REFERENCES users(id)
     );
 
+    CREATE TABLE IF NOT EXISTS deals (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL,
+      client_name TEXT NOT NULL,
+      amount REAL NOT NULL,
+      description TEXT,
+      status TEXT DEFAULT 'new' CHECK(status IN ('new', 'in_progress', 'completed', 'cancelled')),
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
     CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
     CREATE INDEX IF NOT EXISTS idx_reset_tokens_token ON reset_tokens(token);
+    CREATE INDEX IF NOT EXISTS idx_deals_status ON deals(status);
+    CREATE INDEX IF NOT EXISTS idx_deals_created_at ON deals(created_at);
   `);
 
   console.log('✅ Database initialized');

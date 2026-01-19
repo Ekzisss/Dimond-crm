@@ -1,6 +1,7 @@
 .vscode
 .amazonq
 .env*
+.roo
 
 node_modules
 dist

@@ -54,11 +54,34 @@
   padding: 16px;
   cursor: pointer;
   transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .dealCard:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
+}
+
+.dealHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.priorityIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dealId {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
 }
 
 .dealTitle {
@@ -78,4 +101,42 @@
   font-size: 16px;
   font-weight: 700;
   color: #2563eb;
+}
+
+.dealFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.dealDate {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.dealActions {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.editButton,
+.deleteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  font-size: 16px;
+}
+
+.editButton:hover {
+  background-color: #e0f2fe;
+}
+
+.deleteButton:hover {
+  background-color: #fee2e2;
 }

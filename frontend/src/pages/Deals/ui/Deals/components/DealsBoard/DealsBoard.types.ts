@@ -1,10 +1,15 @@
 /**
  * Статус сделки
  */
-export type DealStatus = 'new' | 'in-progress' | 'negotiation' | 'closed';
+export type DealStatus = 'new' | 'in_progress' | 'completed' | 'cancelled';
 
 /**
- * Сделка
+ * Приоритет сделки (вычисляемый)
+ */
+export type DealPriority = 'low' | 'medium' | 'high';
+
+/**
+ * Сделка из API
  */
 export interface Deal {
   /**
@@ -31,7 +36,24 @@ export interface Deal {
    * Имя клиента
    */
   clientName: string;
+
+  /**
+   * Дата создания
+   */
+  createdAt: string;
+
+  /**
+   * Описание
+   */
+  description?: string;
+
+  /**
+   * Дата обновления
+   */
+  updatedAt: string;
 }
+
+import { type Deal as ApiDeal } from '@shared/api/deals';
 
 /**
  * Колонка канбан-доски
@@ -48,12 +70,30 @@ export interface Column {
   title: string;
 
   /**
+   * Цвет колонки
+   */
+  color: string;
+
+  /**
    * Сделки в колонке
    */
-  deals: Deal[];
+  deals: ApiDeal[];
 }
 
 /**
  * Пропсы компонента DealsBoard
  */
-export type DealsBoardProps = Record<string, never>;
+export type DealsBoardProps = {
+  /**
+   * Callback для обновления доски
+   */
+  onRefresh?: () => void;
+  /**
+   * Callback для редактирования сделки
+   */
+  onEdit?: (deal: ApiDeal) => void;
+  /**
+   * Callback для удаления сделки
+   */
+  onDelete?: (dealId: string) => void;
+};
