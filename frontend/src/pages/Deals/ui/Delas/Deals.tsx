@@ -1,6 +1,6 @@
 import { type FC } from 'react';
 
-import { DealsBoard } from './DealsBoard';
+import { DealsBoard } from './components/DealsBoard';
 import { type DealsProps } from './Deals.types';
 
 /**

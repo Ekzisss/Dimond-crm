@@ -1,1 +1,1 @@
-export { Landing as default } from './ui';
+export { Landing as default } from './ui/Landing';

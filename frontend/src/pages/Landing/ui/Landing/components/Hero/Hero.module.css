@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html {
+  overflow-x: hidden;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+
+  color: #0d0d0d;
+  font-family: 'Montserrat', sans-serif;
+
+  background-color: #f2f2f5;
+}
+
+/* --- Background Text --- */
+.bgContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+
+  font-family: 'Bebas Neue', sans-serif;
+
+  pointer-events: none;
+}
+
+.bgTextTop {
+  z-index: 1;
+  top: 15%;
+  left: 50%;
+
+  color: #e4e1e8;
+  line-height: 0.9;
+  text-align: center;
+  font-size: 33vw;
+
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.bgTextBottom {
+  z-index: 1;
+  bottom: -4%;
+  left: 50%;
+
+  color: #ffffff;
+  line-height: 0.9;
+  text-align: center;
+  font-size: 33vw;
+
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* --- Floating UI Elements --- */
+.smiley {
+  z-index: 50;
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+
+  font-size: 2rem;
+  font-weight: 300;
+
+  pointer-events: none;
+}
+
+/* --- Main Grid Content --- */
+.content {
+  z-index: 10;
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1600px;
+  height: 80vh;
+  padding: 0 50px;
+}
+
+/* Left Column */
+.leftColumn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-direction: column;
+  padding-right: 20px;
+
+  text-align: left;
+}
+
+.headline {
+  line-height: 0.9;
+  font-size: clamp(2.5rem, 3.8vw, 4.5rem);
+  letter-spacing: -0.06em;
+  font-weight: 500;
+}
+
+.headline_first {
+  margin-left: 100px;
+}
+
+/* Center Column (Diamond) */
+.centerColumn {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.diamondImage {
+  z-index: 20;
+
+  width: 100%;
+  width: clamp(300px, 45vw, 700px);
+  height: auto;
+
+  filter: drop-shadow(0 30px 60px rgba(110, 54, 202, 0.4));
+  background-color: transparent;
+  background: transparent;
+}
+
+/* Right Column */
+.rightColumn {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.rightContentInner {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  flex-direction: column;
+  padding-left: 40px;
+}
+
+.subheadline {
+  margin-bottom: 40px;
+
+  line-height: 0.9;
+  font-size: clamp(2.5rem, 3.8vw, 4.5rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+}
+
+.subheadline_last {
+  font-weight: 600;
+}
+
+.description {
+  max-width: 280px;
+  padding-top: 20px;
+
+  color: #333;
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-align: justify;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  border-top: 2px solid #000;
+}
+
+.logo {
+  position: absolute;
+
+  width: 50vw;
+  height: 50vw;
+  max-height: 70vh;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 1024px) {
+  .content {
+    gap: 40px;
+    flex-direction: column;
+    height: auto;
+    padding-top: 120px;
+
+    text-align: center;
+  }
+
+  .smiley {
+    left: 10px;
+  }
+
+  .logo {
+    position: static;
+  }
+
+  .headline_first {
+    margin: 0;
+  }
+
+  .leftColumn {
+    align-items: center;
+    padding-right: 0;
+
+    text-align: center;
+  }
+
+  .rightColumn {
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .rightContentInner {
+    align-items: center;
+    padding-left: 0;
+  }
+
+  .description {
+    text-align: left;
+  }
+}

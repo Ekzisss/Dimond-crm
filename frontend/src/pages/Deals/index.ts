@@ -1,2 +1,1 @@
-export { Deals } from './ui';
-export { Deals as default } from './ui';
+export { Deals as default } from './ui/Delas';
