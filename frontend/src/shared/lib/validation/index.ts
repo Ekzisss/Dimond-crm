@@ -1,5 +1,8 @@
+import { type ValidatePasswordMatchParams } from './validation.types';
+
 export const validateEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   return emailRegex.test(email);
 };
 
@@ -7,7 +10,14 @@ export const validatePassword = (password: string): boolean => {
   return password.length >= 6;
 };
 
-export const validatePasswordMatch = (password: string, confirm: string): boolean => {
+/**
+ * Проверяет совпадение паролей
+ */
+export const validatePasswordMatch = (
+  params: ValidatePasswordMatchParams
+): boolean => {
+  const { password, confirm } = params;
+
   return password === confirm;
 };
 

@@ -1,1 +1,1 @@
-export { Deals as default } from './Deals';
+export { Deals as default } from './ui/Deals';

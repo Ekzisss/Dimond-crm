@@ -28,7 +28,7 @@ export const authResolvers = {
     },
 
     resetPassword: async (_parent: unknown, args: ResetPasswordArgs) => {
-      return authService.resetPassword(args.token, args.newPassword);
+      return authService.resetPassword(args);
     },
   },
 };

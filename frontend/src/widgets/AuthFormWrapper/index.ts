@@ -1,1 +1,1 @@
-export { AuthFormWrapper } from './AuthFormWrapper';
+export { AuthFormWrapper } from './ui/AuthFormWrapper';

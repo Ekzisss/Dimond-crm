@@ -90,7 +90,7 @@ export class AuthService {
   /**
    * Сброс пароля
    */
-  async resetPassword(token: string, newPassword: string): Promise<boolean> {
+  async resetPassword({ token, newPassword }: { token: string; newPassword: string }): Promise<boolean> {
     const resetToken = await resetTokenDb.findByToken(token);
 
     if (!resetToken) {
