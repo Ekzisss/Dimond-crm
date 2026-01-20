@@ -96,4 +96,8 @@ export type DealsBoardProps = {
    * Callback для удаления сделки
    */
   onDelete?: (dealId: string) => void;
+  /**
+   * Callback для изменения статуса сделки
+   */
+  onStatusChange?: (dealId: string, status: DealStatus) => void;
 };

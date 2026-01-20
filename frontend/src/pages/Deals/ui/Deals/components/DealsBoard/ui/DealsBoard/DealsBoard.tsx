@@ -14,8 +14,20 @@ import s from './DealsBoard.module.css';
  * @returns JSX элемент
  */
 export const DealsBoard: FC<DealsBoardProps> = (props) => {
-  const { loading, error, columns, handleEdit, handleDelete } =
-    useDealsBoard(props);
+  const {
+    loading,
+    error,
+    columns,
+    draggedDeal,
+    dragOverColumn,
+    handleEdit,
+    handleDelete,
+    handleDragStart,
+    handleDragEnd,
+    handleDragOver,
+    handleDragLeave,
+    handleDrop,
+  } = useDealsBoard(props);
 
   if (loading) {
     return <div className={s.loading}>Загрузка сделок...</div>;
@@ -26,9 +38,29 @@ export const DealsBoard: FC<DealsBoardProps> = (props) => {
   }
 
   return (
-    <div className={s.board}>
+    <div
+      className={s.board}
+      onDragOver={(e) => {
+        // Предотвращаем скроллинг страницы при перетаскивании
+        e.preventDefault();
+      }}
+    >
       {columns.map((column) => (
-        <div key={column.id} className={s.column}>
+        <div
+          key={column.id}
+          className={`${s.column} ${dragOverColumn === column.id ? s.dragOver : ''}`}
+          onDragOver={(e) => {
+            e.preventDefault();
+
+            handleDragOver(column.id);
+          }}
+          onDragLeave={handleDragLeave}
+          onDrop={(e) => {
+            e.preventDefault();
+
+            handleDrop(column.id);
+          }}
+        >
           <div
             className={s.columnHeader}
             style={{ borderBottomColor: column.color }}
@@ -36,6 +68,7 @@ export const DealsBoard: FC<DealsBoardProps> = (props) => {
             <h2 className={s.columnTitle} style={{ color: column.color }}>
               {column.title}
             </h2>
+
             <span
               className={s.columnCount}
               style={{ backgroundColor: `${column.color}20` }}
@@ -47,8 +80,16 @@ export const DealsBoard: FC<DealsBoardProps> = (props) => {
           <div className={s.dealsList}>
             {column.deals.map((deal) => {
               const priority = getDealPriority(deal.amount);
+              const isDragging = draggedDeal?.id === deal.id;
+
               return (
-                <div key={deal.id} className={s.dealCard}>
+                <div
+                  key={deal.id}
+                  className={`${s.dealCard} ${isDragging ? s.dragging : ''}`}
+                  draggable
+                  onDragStart={() => handleDragStart(deal)}
+                  onDragEnd={handleDragEnd}
+                >
                   <div className={s.dealHeader}>
                     <div
                       className={s.priorityIndicator}
@@ -61,7 +102,9 @@ export const DealsBoard: FC<DealsBoardProps> = (props) => {
                               : '#10b981',
                       }}
                     />
+
                     <span className={s.dealId}>#{deal.id}</span>
+
                     <div className={s.dealActions}>
                       <button
                         type="button"
@@ -71,6 +114,7 @@ export const DealsBoard: FC<DealsBoardProps> = (props) => {
                       >
                         <EditIcon size={16} />
                       </button>
+
                       <button
                         type="button"
                         className={s.deleteButton}
@@ -83,12 +127,14 @@ export const DealsBoard: FC<DealsBoardProps> = (props) => {
                   </div>
 
                   <div className={s.dealTitle}>{deal.title}</div>
+
                   <div className={s.dealClient}>{deal.clientName}</div>
 
                   <div className={s.dealFooter}>
                     <div className={s.dealAmount}>
                       {deal.amount.toLocaleString('ru-RU')} ₽
                     </div>
+
                     <div className={s.dealDate}>
                       {new Date(deal.createdAt).toLocaleDateString('ru-RU')}
                     </div>

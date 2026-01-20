@@ -30,6 +30,7 @@ export const Deals: FC<DealsProps> = withSidebar(() => {
       amount:
         typeof data.amount === 'string' ? parseFloat(data.amount) : data.amount,
     });
+
     setRefreshKey((prev) => prev + 1);
   };
 
@@ -47,6 +48,7 @@ export const Deals: FC<DealsProps> = withSidebar(() => {
             ? parseFloat(data.amount)
             : data.amount,
       });
+
       setRefreshKey((prev) => prev + 1);
       setEditingDeal(null);
     }
@@ -55,8 +57,18 @@ export const Deals: FC<DealsProps> = withSidebar(() => {
   const handleDeleteDeal = async (dealId: string) => {
     if (window.confirm('Вы уверены, что хотите удалить эту сделку?')) {
       await dealsApi.delete(dealId);
+
       setRefreshKey((prev) => prev + 1);
     }
+  };
+
+  const handleStatusChange = async (dealId: string, status: Deal['status']) => {
+    await dealsApi.update({
+      id: dealId,
+      status,
+    });
+
+    setRefreshKey((prev) => prev + 1);
   };
 
   return (
@@ -80,6 +92,7 @@ export const Deals: FC<DealsProps> = withSidebar(() => {
           key={refreshKey}
           onEdit={handleEditDeal}
           onDelete={handleDeleteDeal}
+          onStatusChange={handleStatusChange}
         />
 
         <CreateDealModal
