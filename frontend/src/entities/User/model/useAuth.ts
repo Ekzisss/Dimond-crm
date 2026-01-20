@@ -148,11 +148,19 @@ export const useAuth = () => {
     }
   };
 
+  /**
+   * Выход из системы
+   */
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+  };
+
   return {
     login,
     register,
     forgotPassword,
     resetPassword,
+    logout,
     isLoading: loginLoading || registerLoading || forgotLoading || resetLoading,
     error,
   };

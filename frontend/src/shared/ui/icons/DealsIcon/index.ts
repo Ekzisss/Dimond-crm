@@ -1,0 +1,1 @@
+export { DealsIcon } from './DealsIcon';
