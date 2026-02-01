@@ -52,15 +52,21 @@ app.get('/api/health', (_, res) => {
   res.json({ ok: true });
 });
 
+// Основная страница - лендинг
+app.get('/', (_, res) => {
+  res.sendFile(path.join(PROJECT_ROOT, 'frontend', 'dist', 'landing.html'));
+});
+
 // FRONT
 app.use(express.static(path.join(PROJECT_ROOT, 'frontend', 'dist')));
 
+// Все остальные маршруты - основное приложение
 app.use((_, res) => {
   res.sendFile(path.join(PROJECT_ROOT, 'frontend', 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.error(`Server running on http://localhost:${PORT}`);
-  console.error(`GraphQL endpoint: http://localhost:${PORT}/graphql`);
+  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`GraphQL endpoint: http://localhost:${PORT}/graphql`);
   process.stdout.write('\n');
 });

@@ -1,5 +1,4 @@
 import { type FC } from 'react';
-import { Link } from 'react-router';
 
 import s from './Header.module.css';
 
@@ -10,10 +9,10 @@ export const Header: FC = () => {
         Diamond <span className={s.logoHighlight}>CRM</span>
       </div>
 
-      <Link to="/login" className={s.button}>
+      <a href="/login" className={s.button}>
         <div className={s.plus}>+</div>
         GET <br /> STARTED
-      </Link>
+      </a>
     </div>
   );
 };

@@ -10,7 +10,6 @@ export const Landing: FC = () => {
     <div className={s.landing}>
       <main className={s.main}>
         <Header />
-
         <Hero />
       </main>
     </div>
